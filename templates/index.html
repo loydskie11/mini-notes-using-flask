@@ -4,12 +4,20 @@
   <meta charset="UTF-8" />
   <title>Simple Notes App with Delete</title>
   <style>
+    ::-webkit-scrollbar{
+      display: none;
+    }
     body {
       font-family: Arial, sans-serif;
       padding: 40px;
-      background: #f9f9f9;
+      background: #ece6e6;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+     
+      align-items: center;
     }
-    h2 {
+    h3 {
       text-align: center;
     }
     form {
@@ -17,30 +25,57 @@
       margin-bottom: 20px;
     }
     textarea {
-      width: 300px;
+      width: 90%;
       height: 100px;
       padding: 10px;
       font-size: 16px;
+      background-color: transparent;
+      border-radius: 8px;
     }
     input{
         height: 35px;
         padding-left: 10px;
+        background-color: rgb(247, 241, 242);
+        border-radius: 8px;
+        border: 1px solid black;
     }
     
-    button {
+    .addNotes button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-top: 10px;
+      margin-top: 20px;
       cursor: pointer;
+      border-radius: 8px;
+      background-color: rgb(247, 241, 242);
+      border: 1px solid black;
+    }
+    .search-form button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      background-color: rgb(247, 241, 242);
+      border: 1px solid black;
+    }
+    button {
+      transition: transform 0.3s ease;
+    }
+    button:hover{
+      transform: scale(1.05);
     }
     .note {
       max-width: 400px;
-      margin: 10px auto;
+      width: 300px;
+      margin: 5px auto;
       background: white;
-      padding: 15px;
-      border-left: 5px solid #2196F3;
+      padding: 15px 70px 15px 15px;
+      border-left: 5px solid pink;
       box-shadow: 0 0 4px rgba(0,0,0,0.1);
       position: relative;
+      transition: transform 0.3s ease;
+    }
+    .note:hover{
+      transform: scale(1.05);
     }
     .delete-btn {
       position: absolute;
@@ -54,19 +89,37 @@
       border-radius: 3px;
       cursor: pointer;
     }
+    .addNotes {
+      padding: 10px 30px;
+      background-color: rgb(244, 224, 227);
+      width: 350px;
+      border-radius: 20px;
+      box-shadow: 0px 2px rgba(0, 0, 0, 0.104);
+    }
+    .search-form {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <h2>📝 Simple Notes using Flask</h2>
-  <form method="POST">
-    <textarea name="note" placeholder="Write a note..." required></textarea><br />
-    <button type="submit">Add Note</button>
-  </form>
+  <div class="addNotes">
+    <h3>📝 Simple Notes using Flask</h3>
+    <form method="POST">
+      <textarea name="note" placeholder="Write a note..." required></textarea><br />
+      <button type="submit">Add Note</button>
+    </form>
+  </div>
 
-  <form class="search-form" method="GET" action="/">
-    <input type="text" name="query" placeholder="Search notes by ID or content" value="{{ query or '' }}">
+
+  <form class="search-form" method="GET" action="/" style="display: flex; gap: 8px;">
+    <input type="text" name="query" placeholder="Search notes by ID/content" value="{{ query or '' }}" required>
     <button type="submit">Search</button>
+    <a href="/" style="text-decoration: none;">
+      <button type="button">Clear</button>
+    </a>
   </form>
 
   {% for note in notes %}
