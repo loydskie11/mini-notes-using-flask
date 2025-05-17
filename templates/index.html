@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple Notes App with Delete</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+    }
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 300px;
+      height: 100px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .note {
+      max-width: 400px;
+      margin: 10px auto;
+      background: white;
+      padding: 15px;
+      border-left: 5px solid #2196F3;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📝 Simple Flask Notes with Delete</h2>
+  <form method="POST">
+    <textarea name="note" placeholder="Write a note..." required></textarea><br />
+    <button type="submit">Add Note</button>
+  </form>
+
+  {% for note in notes %}
+    <div class="note">
+      {{ note }}
+      <form method="POST" action="/delete/{{ loop.index0 }}" style="display:inline;">
+        <button class="delete-btn" type="submit">Delete</button>
+      </form>
+    </div>
+  {% endfor %}
+
+</body>
+</html>
