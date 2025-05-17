@@ -22,6 +22,11 @@
       padding: 10px;
       font-size: 16px;
     }
+    input{
+        height: 35px;
+        padding-left: 10px;
+    }
+    
     button {
       padding: 10px 20px;
       font-size: 16px;
@@ -53,10 +58,15 @@
 </head>
 <body>
 
-  <h2>📝 Simple Flask Notes with Delete</h2>
+  <h2>📝 Simple Notes using Flask</h2>
   <form method="POST">
     <textarea name="note" placeholder="Write a note..." required></textarea><br />
     <button type="submit">Add Note</button>
+  </form>
+
+  <form class="search-form" method="GET" action="/">
+    <input type="text" name="query" placeholder="Search notes by ID or content" value="{{ query or '' }}">
+    <button type="submit">Search</button>
   </form>
 
   {% for note in notes %}
